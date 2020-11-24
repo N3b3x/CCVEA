@@ -2,3 +2,5 @@
 *.MOV
 *.mjpg
 *.jpg
+settings.json
+c_cpp_properties.json

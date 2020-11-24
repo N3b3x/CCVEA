@@ -1,0 +1,68 @@
+######################################################################
+#                            PREPERATIONS                            #
+######################################################################
+
+* https://tutorials-raspberrypi.com/connect-control-raspberry-pi-ws2812-rgb-led-strips/
+
+Before we install the Raspberry Pi library for the WS2812 LEDs, some preparations have to be made:
+
+The package sources are updated and upgraded:
+    sudo apt-get update
+    sudo apt-get upgrade
+
+We install the required packages (confirm with Y):
+    sudo apt-get install gcc make build-essential python-dev git scons swig
+    sudo pip3 install --upgrade setuptools  [if this doesn't work try: sudo apt-get install python3-pip]
+
+Make python3 your default python (Follow tutorial on website):
+    * https://raspberry-valley.azurewebsites.net/Python-Default-Version/
+        
+The audio output must be deactivated. For this we edit the file
+    sudo nano /etc/modprobe.d/snd-blacklist.conf
+
+Here we add the following line:
+    blacklist snd_bcm2835
+
+Then the file is saved by pressing CTRL + O and CTRL + X closes the editor.
+
+We also need to edit the configuration file:
+    sudo nano /boot/config.txt
+
+Below are lines with the following content (with Ctrl + W you can search):
+
+# Enable audio (loads snd_bcm2835)
+    dtparam=audio=on
+This bottom line is commented out with a hashtag # at the beginning of the line: 
+    #dtparam=audio=on
+
+Enable SPI & I2C:
+    Go to Menu->Preferences->Raspberry Pi configuration
+    Go to Interface Menu
+    Enable SPI and I2C
+
+Install Python Libraries:
+    pip3 install RPI.GPIO
+    pip3 install adafruit-blinka
+
+We restart the system
+    sudo reboot
+
+######################################################################
+#                            INSTALLATIONS                           #
+######################################################################
+* https://learn.adafruit.com/neopixels-on-raspberry-pi/python-usage
+
+sudo pip3 install rpi_ws281x adafruit-circuitpython-neopixel
+sudo python3 -m pip install --force-reinstall adafruit-blinka
+
+######################################################################
+#                            CIRCUIT SETUP                           #
+######################################################################
+
+                            5V  -> 5V  
+            DIN ->  Logic Level Converter -> GPIO18
+                            GND -> GND
+
+* The strip can only be connected to GPIO10, GPIO12, GPIO18 or GPIO21 to work
+* The raspberry pi can also not supply much current thus a proper power supply unit must be used if needed
+* The raspberry pi works on a 3.3V logic but the strip uses 5V thus a logic level converter is necessary

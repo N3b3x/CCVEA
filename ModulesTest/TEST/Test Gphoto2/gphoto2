@@ -1,4 +1,4 @@
-sage: gphoto2 [-?qvalLnPTDR] [-?|--help] [--usage] [--debug]
+Usage: gphoto2 [-?qvalLnPTDR] [-?|--help] [--usage] [--debug]
         [--debug-loglevel=STRING] [--debug-logfile=FILENAME] [-q|--quiet]
         [--hook-script=FILENAME] [--stdout] [--stdout-size] [--auto-detect]
         [--show-exif=STRING] [--show-info=STRING] [--summary] [--manual]
