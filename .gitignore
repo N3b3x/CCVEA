@@ -1,0 +1,4 @@
+# Ignore all .MOV files
+*.MOV
+*.mjpg
+*.jpg
